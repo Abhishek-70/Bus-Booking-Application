@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Route {
 
     private String fromLocation;
     private String toLocation;
-    private String fromDate;
+    private LocalDate fromDate;
     private String toDate;
     private String totalDuration;
     private String fromTime;

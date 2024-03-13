@@ -25,12 +25,14 @@ public class BusServiceImpl {
     private ModelMapper modelMapper; // Assuming you're using a mapping library like ModelMapper
 
     @Autowired
-    private RouteRepository routeRepository; // Assuming you have a JpaRepository for Route entity
+   private RouteRepository routeRepository;// Assuming you have a JpaRepository for Route entity
 
     @Autowired
     private SubRouteRepository subRouteRepository; // Assuming you have a JpaRepository for Subroute entity
 
     @Transactional
+    //1.we create here method to add the bus to the portal for the BUS present for Running purpose
+
     public void addBus(BusDto busDto) {
         // 1. Create BUS entity from BusDto
         Bus bus = new Bus();
@@ -45,7 +47,7 @@ public class BusServiceImpl {
         Route route = new Route();
         route.setFromLocation(busDto.getRoute().getFromLocation());
         route.setToLocation(busDto.getRoute().getToLocation());
-        route.setFromDate(busDto.getRoute().getFromDate());
+       route.setFromDate(busDto.getRoute().getFromDate());
         route.setToDate(busDto.getRoute().getToDate());
         route.setTotalDuration(busDto.getRoute().getTotalDuration());
         route.setFromTime(busDto.getRoute().getFromTime());
@@ -88,6 +90,15 @@ public class BusServiceImpl {
 
             }
         }
+    }
+
+
+    //2.here we create a method from which we can get the BUS details using (fromLocation-toLocation, and fromDate)
+
+    public List<Route> getByFromLocationToLocationAndFromDate(String fromLocation,String toLocation,String fromDate){
+
+        List<Route> busByFromLocationToLocationAndFromDate = routeRepository.findBusByFromLocationToLocationAndFromDate(fromLocation, toLocation, fromDate);
+        return busByFromLocationToLocationAndFromDate;
     }
 
 }
